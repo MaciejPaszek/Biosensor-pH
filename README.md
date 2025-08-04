@@ -8,4 +8,4 @@ Pliki programów mikrokontrolera.
 ## Images
 Obrazy używane w programie.
 # Znane błędy
-- [ ] #1
+#1
