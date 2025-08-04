@@ -7,9 +7,5 @@ Pliki projektu .NET Multi-Platform App UI.
 Pliki programów mikrokontrolera.
 ## Images
 Obrazy używane w programie.
-# Zadania
-- [X] Udostępnić pliki na GitHubie
-- [ ] Zrozumieć zasadę działąnia GitHub
-- [ ] Zjeść coś dobrego
 # Znane błędy
-- [ ] https://github.com/MaciejPaszek/Biosensor-pH/issues/1
+- [ ] #1
