@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Biosensor_pH___MAUI.PomiaryPage"
+             Title="PomiaryPage">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+
+        <Button
+        x:Name="PomiarButton"
+        Grid.Column="0"
+        Grid.Row="0"
+        Text="Pomiar"
+        Clicked="PomiarButton_Clicked"/>
+
+
+        <CollectionView
+        x:Name="CollectionViewPomiary"
+        Grid.Column="0"
+        Grid.Row="1"
+        SelectionMode="Single"
+        Margin="10">
+
+            <!-- NAGŁÓWEK JAKO CZĘŚĆ COLLECTIONVIEW -->
+            <CollectionView.Header>
+                <Grid BackgroundColor="#eeeeee" Padding="10" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" Text="IdPomiaru" FontAttributes="Bold" />
+                    <Label Grid.Column="1" Text="IdPacjenta" FontAttributes="Bold" />
+                    <Label Grid.Column="2" Text="TemperaturaPróbki" FontAttributes="Bold" />
+                    <Label Grid.Column="3" Text="TemperaturaOtoczenia" FontAttributes="Bold" />
+                    <Label Grid.Column="4" Text="WilgotnośćOtoczenia" FontAttributes="Bold" />
+                    <Label Grid.Column="5" Text="DataPomiaru" FontAttributes="Bold" />
+                    <Label Grid.Column="6" Text="GodzinaPomiaru" FontAttributes="Bold" />
+                    
+                </Grid>
+            </CollectionView.Header>
+
+            <!-- DANE -->
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="10" ColumnSpacing="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Column="0" Text="{Binding IdPomiaru}" />
+                        <Label Grid.Column="1" Text="{Binding IdPacjenta}" />
+                        <Label Grid.Column="2" Text="{Binding TemperaturaPróbki}" />
+                        <Label Grid.Column="3" Text="{Binding TemperaturaOtoczenia}" />
+                        <Label Grid.Column="4" Text="{Binding WilgotnośćOtoczenia}" />
+                        <Label Grid.Column="5" Text="{Binding DataPomiaru}" />
+                        <Label Grid.Column="6" Text="{Binding GodzinaPomiaru}" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

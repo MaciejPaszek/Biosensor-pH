@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Biosensor_pH___MAUI.ChartsPage"
+             xmlns:drawable="clr-namespace:Biosensor_pH___MAUI"
+             Title="Wykresy">
+
+    <ContentPage.Resources>
+        <drawable:GraphicsDrawableSampleTemperature x:Key="drawableSampleTemperature"/>
+        <drawable:GraphicsDrawableAmbientTemperature x:Key="drawableAmbientTemperature" />
+        <drawable:GraphicsDrawableAmbientHumidity x:Key="drawableAmbientHumidity" />
+        <drawable:GraphicsDrawableCurrent x:Key="drawableCurrent" />
+    </ContentPage.Resources>
+
+    <Grid
+        Margin="10"
+        ColumnSpacing="10"
+        RowSpacing="10"
+        >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="4*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Label
+            Grid.Column="0"
+            Grid.Row="0"
+            FontAttributes="Bold"
+            Text="Temperatura próbki" />
+
+        <GraphicsView
+            x:Name="GraphicsViewSampleTemperature"
+            Grid.Column="0"
+            Grid.Row="1"
+            StartInteraction="GraphicsViewSampleTemperature_StartInteraction"
+            Drawable="{StaticResource drawableSampleTemperature}"/>
+
+        <Label 
+            Grid.Column="0"
+            Grid.Row="2"
+            FontAttributes="Bold"
+            Text="Temperatura otoczenia" />
+        
+        <GraphicsView
+            x:Name="GraphicsViewAmbientTemperature"
+            Grid.Column="0"
+            Grid.Row="3"
+            StartInteraction="GraphicsViewAmbientTemperature_StartInteraction"
+            Drawable="{StaticResource drawableAmbientTemperature}"
+            />
+        
+        <Label 
+            Grid.Column="0"
+            Grid.Row="4"
+            FontAttributes="Bold"
+            Text="Wilgotność otoczenia" />
+        
+        <GraphicsView
+            x:Name="GraphicsViewAmbientHumidity"
+            Grid.Column="0"
+            Grid.Row="5"
+            StartInteraction="GraphicsViewAmbientHumidity_StartInteraction"
+            Drawable="{StaticResource drawableAmbientHumidity}"
+            />
+
+        <Label 
+            x:Name="LabelCurrent"
+            Grid.Column="1"
+            Grid.Row="0"
+            FontAttributes="Bold"
+            Text="Temperatura próbki" />
+
+        <GraphicsView
+            x:Name="GraphicsViewCurrent"
+            Grid.Column="1"
+            Grid.Row="1"
+            Grid.RowSpan="5"
+            Drawable="{StaticResource drawableCurrent}"
+            />
+
+    </Grid>
+
+</ContentPage>

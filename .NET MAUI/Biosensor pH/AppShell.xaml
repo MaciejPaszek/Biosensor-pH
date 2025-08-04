@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="Biosensor_pH___MAUI.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Biosensor_pH___MAUI"
+    Title="Biosensor_pH___MAUI">
+
+    <FlyoutItem Title="Biosensor pH">
+        <ShellContent
+    ContentTemplate="{DataTemplate local:MainPage}"/>
+    </FlyoutItem>
+    
+    <FlyoutItem Title="Pacjenci">
+        <ShellContent
+    ContentTemplate="{DataTemplate local:PacjenciPage}"/>
+    </FlyoutItem>
+
+    <FlyoutItem Title="Pomiary">
+        <ShellContent
+    ContentTemplate="{DataTemplate local:PomiaryPage}"/>
+    </FlyoutItem>
+
+    <FlyoutItem Title="Wykresy">
+        <ShellContent
+    ContentTemplate="{DataTemplate local:ChartsPage}"/>
+    </FlyoutItem>
+
+    <FlyoutItem Title="Konsola">
+        <ShellContent
+    ContentTemplate="{DataTemplate local:ConsolePage}"/>
+    </FlyoutItem>
+
+</Shell>

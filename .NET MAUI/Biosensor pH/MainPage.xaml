@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Biosensor_pH___MAUI.MainPage"
+             Title="Biosensor pH">
+
+    <Grid
+        Margin="0"
+        ColumnSpacing="0"
+        RowSpacing="0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100" />
+            <RowDefinition Height="100" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Image
+            Grid.Column="0"
+            Grid.Row="0"
+            Source="politechnika_logo.png"
+            BackgroundColor="{StaticResource Politechnika}"
+            Aspect="AspectFit"/>
+        
+       
+        <Label
+            Grid.Column="1"
+            Grid.Row="0"
+            BackgroundColor="{StaticResource Politechnika}"
+            />
+
+         <Label
+            Grid.Column="0"
+            Grid.Row="2"
+            Grid.ColumnSpan="2"
+             
+            Text="Platforma sprzętowa:" 
+            FontSize="Title"
+            HorizontalOptions="Center"/>
+        
+         <Label
+            Grid.Column="0"
+            Grid.Row="3"
+            Grid.ColumnSpan="2"
+
+            x:Name="LabelDeviceType"
+            Text="Current platform:" 
+            FontSize="Subtitle"
+            HorizontalOptions="Center"
+                />
+            
+
+        
+
+        
+
+    </Grid>
+
+</ContentPage>

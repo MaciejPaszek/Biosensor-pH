@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Biosensor_pH___MAUI.PacjenciPage"
+             Title="PacjenciPage">
+
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+
+        <Button
+            x:Name="AddNewButton"
+            Grid.Column="0"
+            Grid.Row="0"
+            Text="Dodaj Pacjenta"
+            Clicked="AddNewButton_Clicked"/>
+
+
+        <CollectionView
+            x:Name="CollectionViewPacjenci"
+            Grid.Column="0"
+            Grid.Row="1"
+            SelectionMode="Single"
+            Margin="10">
+
+            <!-- NAGŁÓWEK JAKO CZĘŚĆ COLLECTIONVIEW -->
+            <CollectionView.Header>
+                <Grid BackgroundColor="#eeeeee" Padding="10" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10" />
+                        <ColumnDefinition Width="10" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" Text="Id" FontAttributes="Bold" />
+                    <Label Grid.Column="1" Text="Alias" FontAttributes="Bold" />
+                    <Label Grid.Column="2" Text="Nazwisko" FontAttributes="Bold" />
+                    <Label Grid.Column="3" Text="Imię" FontAttributes="Bold" />
+                </Grid>
+            </CollectionView.Header>
+
+            <!-- DANE -->
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="10" ColumnSpacing="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="10" />
+                            <ColumnDefinition Width="10" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Column="0" Text="{Binding Id}" />
+                        <Label Grid.Column="1" Text="{Binding Alias}" />
+                        <Label Grid.Column="2" Text="{Binding Nazwisko}" />
+                        <Label Grid.Column="3" Text="{Binding Imię}" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+
+
+    
+
+
+    
+    
+</ContentPage>
