@@ -11,3 +11,5 @@ Obrazy używane w programie.
 - [X] Udostępnić pliki na GitHubie
 - [ ] Zrozumieć zasadę działąnia GitHub
 - [ ] Zjeść coś dobrego
+# Znane błędy
+- [ ] #1
