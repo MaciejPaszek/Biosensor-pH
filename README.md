@@ -12,4 +12,4 @@ Obrazy używane w programie.
 - [ ] Zrozumieć zasadę działąnia GitHub
 - [ ] Zjeść coś dobrego
 # Znane błędy
-- [ ] #1
+- [ ] https://github.com/MaciejPaszek/Biosensor-pH/issues/1
