@@ -99,12 +99,7 @@ public partial class ConsolePage : ContentPage
         {
             if (Arduino.Connect())
             {
-#if WINDOWS
                 EditorWrite("Po³¹czono z " +  Arduino.portName + ".");
-#elif ANDROID
-                EditorWrite("Po³¹czono z " + Arduino.productName + ".");
-
-#endif
                 ButtonConnectDisconnect.Text = "Roz³¹cz";
                 EntryCommand.IsEnabled = true;
                 ButtonSend.IsEnabled = true;
@@ -124,21 +119,16 @@ public partial class ConsolePage : ContentPage
 
     private void RefreshPortNames()
     {
-#if WINDOWS
+
         PickerPortName.ItemsSource = Arduino.GetPortNames();
-#elif ANDROID
-        PickerPortName.ItemsSource = Arduino.GetDeviceNames();
-#endif
+
         if (PickerPortName.ItemsSource.Count > 0)
             PickerPortName.SelectedIndex = 0;
     }
 
     private void PickerPortName_SelectedIndexChanged(object sender, EventArgs e)
     {
-#if WINDOWS
         Arduino.portName = (string)PickerPortName.SelectedItem;
-#elif ANDROID
-        Arduino.usbDeviceName = (string)PickerPortName.SelectedItem;
-#endif
+        //Arduino.usbDeviceName = (string)PickerPortName.SelectedItem;
     }
 }
