@@ -1,5 +1,4 @@
-﻿using CommunityToolkit.Mvvm.Messaging;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.IO.Ports;
 
 namespace Biosensor_pH

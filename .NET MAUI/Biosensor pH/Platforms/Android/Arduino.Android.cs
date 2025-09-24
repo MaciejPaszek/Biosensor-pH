@@ -1,8 +1,7 @@
-﻿using CommunityToolkit.Mvvm.Messaging;
-using System.Diagnostics;
+﻿using System.Diagnostics;
+using System.Text;
 using Android.Content;
 using Android.Hardware.Usb;
-using System.Text;
 using Android.App;
 
 namespace Biosensor_pH
@@ -16,6 +15,7 @@ namespace Biosensor_pH
         public static bool IsConnected
         {
             get { return _isConnected; }
+            set {  _isConnected = value; }
         }
 
         private static string _portName = string.Empty;
@@ -26,10 +26,11 @@ namespace Biosensor_pH
 
             set { _portName = value; }
         }
+
         #endregion
 
 
-        public static bool isConnected = false;
+        //public static bool isConnected = false;
 
         private static string usbDeviceName;
         private static int deviceId;
@@ -44,7 +45,6 @@ namespace Biosensor_pH
         private static UsbEndpoint? usbEndpointIn;
         private static UsbDeviceConnection? usbDeviceConnection;
 
-        // Zmiana nazwy na tą w CSPROJ
         const string ACTION_USB_PERMISSION = "com.maciejpaszek.biosensorph.USB_PERMISSION";
 
         public static Thread? readThread;
@@ -132,7 +132,7 @@ namespace Biosensor_pH
             else
                 Debug.WriteLine("Nie mamy interfejsu.");
 
-            isConnected = true;
+            IsConnected = true;
 
             readThread = new Thread(ReadThread);
 
@@ -266,7 +266,7 @@ namespace Biosensor_pH
                 if (usbDeviceConnection.ReleaseInterface(usbDataInterface))
                     usbDeviceConnection.Close();
 
-            isConnected = false;
+            IsConnected = false;
 
             readThread.Join();
 
@@ -289,7 +289,7 @@ namespace Biosensor_pH
             byte[] bytes = new byte[64];
             StringBuilder stringBuilder = new StringBuilder();
 
-            while (isConnected)
+            while (IsConnected)
             {
                 if (usbDeviceConnection != null && usbEndpointIn != null)
                 {
