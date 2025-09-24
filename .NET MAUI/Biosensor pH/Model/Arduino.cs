@@ -1,5 +1,4 @@
-﻿using CommunityToolkit.Mvvm.Messaging;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 
 namespace Biosensor_pH
 {
@@ -97,7 +96,7 @@ namespace Biosensor_pH
                 finally
                 {
                     ChartSample chartsample = new ChartSample(SampleTemperature, AmbientTemperature, AmbientHumidity);
-                    WeakReferenceMessenger.Default.Send(new NewChartSamplesMessage(chartsample));
+                    //WeakReferenceMessenger.Default.Send(new NewChartSamplesMessage(chartsample));
                 }
             }
         }
@@ -136,7 +135,7 @@ namespace Biosensor_pH
                     SampleTemperature = Convert.ToSingle(strings[3]);
 
                 ChartSample chartsample = new ChartSample(SampleTemperature, AmbientTemperature, AmbientHumidity);
-                WeakReferenceMessenger.Default.Send(new NewChartSamplesMessage(chartsample));
+                //WeakReferenceMessenger.Default.Send(new NewChartSamplesMessage(chartsample));
             }
 
             if (data.StartsWith("I^2C"))
@@ -150,7 +149,7 @@ namespace Biosensor_pH
                 SampleTemperature = -1;
 
                 ChartSample chartsample = new ChartSample(SampleTemperature, AmbientTemperature, AmbientHumidity);
-                WeakReferenceMessenger.Default.Send(new NewChartSamplesMessage(chartsample));
+                //WeakReferenceMessenger.Default.Send(new NewChartSamplesMessage(chartsample));
             }
         }
         #endregion
