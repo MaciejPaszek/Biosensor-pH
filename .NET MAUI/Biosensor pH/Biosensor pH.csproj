@@ -15,7 +15,7 @@
 		<ApplicationTitle>Biosensor pH</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.biosensorphmaui</ApplicationId>
+		<ApplicationId>com.maciejpaszek.biosensorph</ApplicationId>
 
 		<!-- Versions -->
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>

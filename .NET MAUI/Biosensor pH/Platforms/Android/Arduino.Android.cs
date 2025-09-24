@@ -33,19 +33,19 @@ namespace Biosensor_pH
 
         private static string usbDeviceName;
         private static int deviceId;
-        public static string manufacturerName;
-        public static string productName;
+        public static string manufacturerName = string.Empty;
+        public static string productName = string.Empty;
 
-        private static UsbManager usbManager;
-        private static UsbDevice usbDevice;
-        private static UsbInterface usbDataInterface;
-        private static UsbInterface usbControlInterface;
-        private static UsbEndpoint usbEndpointOut;
-        private static UsbEndpoint usbEndpointIn;
-        private static UsbDeviceConnection usbDeviceConnection;
+        private static UsbManager? usbManager;
+        private static UsbDevice? usbDevice;
+        private static UsbInterface? usbDataInterface;
+        private static UsbInterface? usbControlInterface;
+        private static UsbEndpoint? usbEndpointOut;
+        private static UsbEndpoint? usbEndpointIn;
+        private static UsbDeviceConnection? usbDeviceConnection;
 
         // Zmiana nazwy na tą w CSPROJ
-        const string ACTION_USB_PERMISSION = "com.companyname.mauiusbhost.USB_PERMISSION";
+        const string ACTION_USB_PERMISSION = "com.maciejpaszek.biosensorph.USB_PERMISSION";
 
         public static Thread? readThread;
 
@@ -77,6 +77,8 @@ namespace Biosensor_pH
 
             if (usbDevices.Count == null)
                 return false;
+
+            usbDeviceName = PortName;
 
             if (usbDeviceName == string.Empty)
                 return false;
@@ -309,6 +311,9 @@ namespace Biosensor_pH
                                 {
                                     Debug.WriteLine("Line: " + line);
                                     //WeakReferenceMessenger.Default.Send(new AddArduinoLine(line));
+
+                                    DataReceivedEventArgs dataReceivedEventArgs = new DataReceivedEventArgs(line, DateTime.Now);
+                                    OnDataReceived(dataReceivedEventArgs);
 
                                     Read(line);
                                 }
