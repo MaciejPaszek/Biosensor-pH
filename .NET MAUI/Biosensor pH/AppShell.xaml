@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Shell
-    x:Class="Biosensor_pH___MAUI.AppShell"
+    x:Class="Biosensor_pH.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:Biosensor_pH___MAUI"
-    Title="Biosensor_pH___MAUI">
+    xmlns:local="clr-namespace:Biosensor_pH"
+    Title="Biosensor_pH">
 
     <FlyoutItem Title="Biosensor pH">
         <ShellContent

@@ -5,10 +5,30 @@ using Android.Hardware.Usb;
 using System.Text;
 using Android.App;
 
-namespace Biosensor_pH___MAUI
+namespace Biosensor_pH
 {
-    public partial class Arduino
+    public static partial class Arduino
     {
+        #region Właściwości
+
+        private static bool _isConnected;
+
+        public static bool IsConnected
+        {
+            get { return _isConnected; }
+        }
+
+        private static string _portName = string.Empty;
+
+        public static string PortName
+        {
+            get { return _portName; }
+
+            set { _portName = value; }
+        }
+        #endregion
+
+
         public static bool isConnected = false;
 
         private static string usbDeviceName;
@@ -41,11 +61,6 @@ namespace Biosensor_pH___MAUI
                 return Array.Empty<string>();
 
             return usbDevices.Keys.ToArray();
-        }
-
-        public static partial bool IsConnected()
-        {
-            return isConnected;
         }
         
         public static partial bool Connect()
@@ -293,7 +308,7 @@ namespace Biosensor_pH___MAUI
                                 if (!string.IsNullOrWhiteSpace(line))
                                 {
                                     Debug.WriteLine("Line: " + line);
-                                    WeakReferenceMessenger.Default.Send(new AddArduinoLine(line));
+                                    //WeakReferenceMessenger.Default.Send(new AddArduinoLine(line));
 
                                     Read(line);
                                 }

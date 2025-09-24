@@ -1,17 +1,75 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
 using System.Diagnostics;
 
-namespace Biosensor_pH___MAUI
+namespace Biosensor_pH
 {
-    public partial class Arduino
+    public class ConnectionChangedEventArgs : EventArgs
     {
-        public static string portName { get; set; } = string.Empty;
+        public readonly bool ConnectionStatus;
 
+        public ConnectionChangedEventArgs(bool connectionStatus)
+        {
+            ConnectionStatus = connectionStatus;
+        }
+    }
+
+    public class DataReceivedEventArgs : EventArgs
+    {
+        public readonly string Line;
+        public readonly DateTime DateTime;
+
+        public DataReceivedEventArgs(string line, DateTime dateTime)
+        {
+            Line = line;
+            DateTime = dateTime;
+        }
+    }
+
+    public static partial class Arduino
+    {
+        public static event EventHandler<ConnectionChangedEventArgs>? ConnectionChanged;
+
+        private static void OnConnected(ConnectionChangedEventArgs e)
+        {
+            ConnectionChanged?.Invoke(null, e);
+        }
+
+        public static event EventHandler<DataReceivedEventArgs>? DataReceived;
+
+        private static void OnDataReceived(DataReceivedEventArgs e)
+        {
+            DataReceived?.Invoke(null, e);
+        }
+
+        #region Właściwości
+
+        #endregion
+
+        #region Metody zależne od platformy sprzętowej
+
+        /// <summary>
+        /// Połącz z Arduino
+        /// </summary>
         public static partial string[] GetPortNames();
-        public static partial bool IsConnected();
+
+        /// <summary>
+        /// Połącz z Arduino
+        /// </summary>
         public static partial bool Connect();
+
+        /// <summary>
+        /// Rozłącz z Arduino
+        /// </summary>
         public static partial void Disconnect();
+
+        /// <summary>
+        /// Wyślij nową linię tekstu do Arduino
+        /// </summary>
         public static partial void Write(string newLine);
+
+        #endregion
+
+        #region Metody niezależne od platformy sprzętowej
 
         public static void Read(string data)
         {
@@ -95,6 +153,6 @@ namespace Biosensor_pH___MAUI
                 WeakReferenceMessenger.Default.Send(new NewChartSamplesMessage(chartsample));
             }
         }
-
+        #endregion
     }
 }

@@ -2,7 +2,7 @@ using CommunityToolkit.Mvvm.Messaging;
 using CommunityToolkit.Mvvm.Messaging.Messages;
 using System.Diagnostics;
 
-namespace Biosensor_pH___MAUI;
+namespace Biosensor_pH;
 
 public partial class ChartsPage : ContentPage
 {

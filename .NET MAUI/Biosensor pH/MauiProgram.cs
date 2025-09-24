@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 
-namespace Biosensor_pH___MAUI
+namespace Biosensor_pH
 {
     public static class MauiProgram
     {

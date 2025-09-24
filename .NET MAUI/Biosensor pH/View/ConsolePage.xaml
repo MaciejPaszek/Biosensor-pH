@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Biosensor_pH___MAUI.ConsolePage"
-             Title="Konsola">
+             xmlns:viewModel="clr-namespace:Biosensor_pH.ViewModel"
+             x:Class="Biosensor_pH.ConsolePage"
+             x:DataType="viewModel:ConsoleViewModel"
+             Title="Konsola"
+>
+    <ContentPage.BindingContext>
+        <viewModel:ConsoleViewModel />
+    </ContentPage.BindingContext>
 
     <Grid ColumnSpacing="10"
           RowSpacing="10"
@@ -13,64 +19,58 @@
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="50" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="50" />
         </Grid.RowDefinitions>
 
         <Picker
-            x:Name="PickerPortName"
             Grid.Column="0"
             Grid.Row="0"
-            SelectedIndexChanged="PickerPortName_SelectedIndexChanged"/>
+            ItemsSource="{Binding PortNames}"
+            SelectedItem="{Binding PortName}"/>
 
         <Button
-            x:Name="ButtonRefreshPortNames"
             Grid.Column="1"
             Grid.Row="0"
             Text="Odśwież"
-            Clicked="ButtonRefreshPortNames_Clicked"/>
+            Command="{Binding ArduinoRefresh}"/>
 
         <Button
-            x:Name="ButtonConnectDisconnect"
             Grid.Column="2"
             Grid.Row="0"
-            Text="Połącz"
-            Clicked="ButtonConnectDisconnect_Clicked"/>
+            Text="{Binding ButtonName}"
+            Command="{Binding ArduinoConnect}"/>
 
         <Editor
-            x:Name="EditorOutput"
             Grid.Column="0"
             Grid.ColumnSpan="3"
             Grid.Row="1"
             AutoSize="TextChanges"
             FontFamily="Consolas"
             FontSize="16.0"
-            IsReadOnly="True"/> 
+            IsReadOnly="True"
+            Text="{Binding OutputString}"/> 
 
         <Entry
-            x:Name="EntryCommand"
             Grid.Column="0"
             Grid.Row="2"
             Placeholder="Komenda"
             FontFamily="Consolas"
             FontSize="16.0"
-            IsEnabled="False"
-            Completed="EntryCommand_Completed"/>
+            Text="{Binding CommandString}"
+            ReturnCommand="{Binding ArduinoWrite}"/>
 
         <Button
-            x:Name="ButtonSend"
             Grid.Column="1"
             Grid.Row="2"
             Text="Wyślij"
-            IsEnabled="False"
-            Clicked="ButtonSend_Clicked"/>
+            Command="{Binding ArduinoWrite}"/>
 
         <Button
-            x:Name="ButtonClear"
             Grid.Column="2"
             Grid.Row="2"
             Text="Wyczyść"
-            Clicked="ButtonClear_Clicked"/>
+            Command="{Binding ArduinoClear}"/>
     </Grid>
 </ContentPage>

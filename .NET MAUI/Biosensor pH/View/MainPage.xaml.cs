@@ -2,7 +2,7 @@
 using CommunityToolkit.Mvvm.Messaging;
 using System.Diagnostics;
 
-namespace Biosensor_pH___MAUI
+namespace Biosensor_pH
 {
 
     public partial class MainPage : ContentPage

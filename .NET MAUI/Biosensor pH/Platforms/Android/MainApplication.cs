@@ -1,7 +1,7 @@
 ﻿using Android.App;
 using Android.Runtime;
 
-namespace Biosensor_pH___MAUI
+namespace Biosensor_pH
 {
     [Application]
     public class MainApplication : MauiApplication
