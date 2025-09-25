@@ -315,7 +315,7 @@ namespace Biosensor_pH
                                     DataReceivedEventArgs dataReceivedEventArgs = new DataReceivedEventArgs(line, DateTime.Now);
                                     OnDataReceived(dataReceivedEventArgs);
 
-                                    Read(line);
+                                    //Read(line);
                                 }
                             }
                             else
