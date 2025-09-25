@@ -1,6 +1,4 @@
-﻿using CommunityToolkit.Mvvm;
-using CommunityToolkit.Mvvm.Messaging;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 
 namespace Biosensor_pH
 {
