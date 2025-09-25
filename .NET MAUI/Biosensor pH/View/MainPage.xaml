@@ -1,9 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModel="clr-namespace:Biosensor_pH.ViewModel"
              x:Class="Biosensor_pH.MainPage"
+             x:DataType="viewModel:MainViewModel"
              Title="Biosensor pH">
 
+    <ContentPage.BindingContext>
+        <viewModel:MainViewModel />
+    </ContentPage.BindingContext>
+    
     <Grid
         Margin="0"
         ColumnSpacing="0"
@@ -15,9 +21,6 @@
         
         <Grid.RowDefinitions>
             <RowDefinition Height="100" />
-            <RowDefinition Height="100" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
@@ -27,38 +30,49 @@
             Source="politechnika_logo.png"
             BackgroundColor="{StaticResource Politechnika}"
             Aspect="AspectFit"/>
-        
-       
-        <Label
+
+
+        <Label Text="Biosensor pH"
             Grid.Column="1"
             Grid.Row="0"
+            TextColor="White"
+            FontSize="50"
+            FontFamily="Arial"
+            FontAttributes="Bold"
+            VerticalTextAlignment="Center"
+            Padding="50, 0, 0, 0"
             BackgroundColor="{StaticResource Politechnika}"
             />
 
-         <Label
-            Grid.Column="0"
-            Grid.Row="2"
-            Grid.ColumnSpan="2"
-             
-            Text="Platforma sprzętowa:" 
-            FontSize="Title"
-            HorizontalOptions="Center"/>
-        
-         <Label
-            Grid.Column="0"
-            Grid.Row="3"
-            Grid.ColumnSpan="2"
+        <VerticalStackLayout Grid.Row="1" Grid.ColumnSpan="2">
 
-            x:Name="LabelDeviceType"
-            Text="Current platform:" 
-            FontSize="Subtitle"
-            HorizontalOptions="Center"
-                />
+            <Label Text="Platforma sprzętowa:" 
+               FontSize="Title"
+               HorizontalOptions="Center"/>
+
+            <Label x:Name="LabelDeviceType"
+               Text="Current platform:" 
+               FontSize="Subtitle"
+               HorizontalOptions="Center"
+                   />
+
+            <Label Text="Motyw Jasny/Ciemny:" 
+               FontSize="Title"
+               HorizontalOptions="Center"/>
             
+            <Switch IsToggled="{Binding IsToggled}" HorizontalOptions="Center" />
 
-        
-
-        
+            <Picker SelectedIndex="2" WidthRequest="200">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Systemowy</x:String>
+                        <x:String>Jasny</x:String>
+                        <x:String>Ciemny</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+            
+        </VerticalStackLayout>
 
     </Grid>
 
