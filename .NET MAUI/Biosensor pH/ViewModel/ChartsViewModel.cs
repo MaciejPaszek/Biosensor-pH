@@ -1,4 +1,6 @@
-﻿using System.ComponentModel;
+﻿using Biosensor_pH.Controls;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
@@ -22,9 +24,9 @@ namespace Biosensor_pH.ViewModel
 
         private const int maxQueueCapacity = 600;
 
-        private Queue<Point> _sampleTemperature;
+        private Queue<DataPoint> _sampleTemperature;
 
-        public Queue<Point> SampleTemperature
+        public Queue<DataPoint> SampleTemperature
         {
             get { return _sampleTemperature; }
             set
@@ -34,9 +36,9 @@ namespace Biosensor_pH.ViewModel
             }
         }
 
-        private Queue<Point> _ambientTemperature;
+        private Queue<DataPoint> _ambientTemperature;
 
-        public Queue<Point> AmbientTemperature
+        public Queue<DataPoint> AmbientTemperature
         {
             get { return _ambientTemperature; }
             set
@@ -46,9 +48,9 @@ namespace Biosensor_pH.ViewModel
             }
         }
 
-        private Queue<Point> _ambientHumidity;
+        private Queue<DataPoint> _ambientHumidity;
 
-        public Queue<Point> AmbientHumidity
+        public Queue<DataPoint> AmbientHumidity
         {
             get { return _ambientHumidity; }
             set
@@ -66,10 +68,10 @@ namespace Biosensor_pH.ViewModel
         {
             _isConnected = false;
 
-            _sampleTemperature  = new Queue<Point>(100);
-            _ambientTemperature = new Queue<Point>(100);
-            _ambientHumidity    = new Queue<Point>(100);
-            
+            SampleTemperature  = new Queue<DataPoint>();
+            AmbientTemperature = new Queue<DataPoint>();
+            AmbientHumidity    = new Queue<DataPoint>();
+
             Arduino.ConnectionChanged += Arduino_ConnectionChanged;
             Arduino.DataReceived += Arduino_DataReceived;
         }
@@ -109,9 +111,9 @@ namespace Biosensor_pH.ViewModel
                 }
                 finally
                 {
-                    SampleTemperature.Enqueue(new Point(0.0, sampleTemperature));
-                    AmbientTemperature.Enqueue(new Point(0.0, ambientTemperature));
-                    AmbientHumidity.Enqueue(new Point(0.0, ambientHumidity));
+                    SampleTemperature.Enqueue(new DataPoint(sampleTemperature, e.DateTime));
+                    AmbientTemperature.Enqueue(new DataPoint(ambientTemperature, e.DateTime));
+                    AmbientHumidity.Enqueue(new DataPoint(ambientHumidity, e.DateTime));
                 }
             }
         }

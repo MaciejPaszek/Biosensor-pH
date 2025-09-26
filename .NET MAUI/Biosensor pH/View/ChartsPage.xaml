@@ -9,7 +9,7 @@
              Title="Wykresy">
     
     <ContentPage.BindingContext>
-        <viewModel:ChartsViewModel />
+        <viewModel:ChartsViewModel/>
     </ContentPage.BindingContext>
 
     <Grid
@@ -30,41 +30,39 @@
             Data="{Binding SampleTemperature}" Unit="°C"
             Minimum="0.0" Maximum="40.0"
             MainScale="10.0" SecondaryScale="2.0"
-            
+            TimeInterval="00:00:30"
+            MainTimeScale="00:00:10" SecondaryTimeScale="00:00:02"      
             LineColor="Red"
             Grid.Column="0"
             Grid.Row="0"/>
 
         <control:Chart Title="Temperatura próbki"
-            Data="{Binding AmbientTemperature}"
-            Minimum="0.0"
-            Maximum="40.0"
-            Unit="°C"
-            MainScale="10.0"
-            SecondaryScale="2.0"
+            Data="{Binding AmbientTemperature}" Unit="°C"
+            Minimum="0.0" Maximum="40.0"
+            MainScale="10.0" SecondaryScale="2.0"
+            TimeInterval="00:00:30"
+            MainTimeScale="00:00:10" SecondaryTimeScale="00:00:02"
             LineColor="Green"
             Grid.Column="0"
             Grid.Row="1"/>
 
         <control:Chart Title="Wilgotność otoczenia"
-            Data="{Binding AmbientHumidity}"
-            Minimum="0.0"
-            Maximum="100.0"
-            Unit="%"
-            MainScale="20.0"
-            SecondaryScale="10.0"
+            Data="{Binding AmbientHumidity}" Unit="%"
+            Minimum="0.0" Maximum="100.0"
+            MainScale="20.0" SecondaryScale="10.0"
+            TimeInterval="00:00:30"
+            MainTimeScale="00:00:10" SecondaryTimeScale="00:00:02"
             LineColor="Blue"
             Grid.Column="0"
             Grid.Row="2"/>
 
         <control:Chart Title="Bieżący wykres"
             Data="{Binding AmbientHumidity}"
-            Minimum="3.0"
-            Maximum="91.1"
-            Unit="mA"
-            MainScale="15.0"
-            SecondaryScale="5.0"
-            LineColor="White"
+            Minimum="0.0" Maximum="100.0" Unit="%"
+            MainScale="10.0" SecondaryScale="1.0"
+            TimeInterval="00:01:00"
+            MainTimeScale="0:0:5" SecondaryTimeScale="0:0:1"
+            LineColor="Magenta"
             Grid.Column="1"
             Grid.Row="0"
             Grid.RowSpan="3"/>

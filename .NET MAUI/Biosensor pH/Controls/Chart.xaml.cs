@@ -1,10 +1,32 @@
+using System.Collections.Generic;
+using System.Diagnostics;
+
 namespace Biosensor_pH.Controls;
+
+public class DataPoint
+{
+    public readonly double Value;
+    public readonly DateTime Time;
+
+    public DataPoint(double value, DateTime time)
+    {
+        Value = value;
+        Time = time;
+    }
+}
 
 public partial class Chart : ContentView, IDrawable
 {
     #region Bindable Property
 
-    public static readonly BindableProperty TitleProperty = BindableProperty.Create(nameof(Title), typeof(string), typeof(Chart), string.Empty);
+    public static readonly BindableProperty TitleProperty = BindableProperty.Create(nameof(Title), typeof(string), typeof(Chart), string.Empty,
+        propertyChanged: OnTitleChanged);
+
+    private static void OnTitleChanged(BindableObject bindable, object oldValue, object newValue)
+    {
+        Chart chart = (Chart)bindable;
+        chart.ChartTitle.Text = (string)newValue;
+    }
 
     public string Title
     {
@@ -12,12 +34,24 @@ public partial class Chart : ContentView, IDrawable
         set => SetValue(Chart.TitleProperty, value);
     }
 
-    public static readonly BindableProperty DataProperty = BindableProperty.Create(nameof(Data), typeof(List<Point>), typeof(Chart), null);
+    public static readonly BindableProperty DataProperty = BindableProperty.Create(nameof(Data), typeof(IEnumerable<DataPoint>), typeof(Chart), null,
+        propertyChanged: OnDataChanged);
 
-    public List<Point> Data
+    private static void OnDataChanged(BindableObject bindable, object oldValue, object newValue)
     {
-        get => (List<Point>)GetValue(Chart.LineColorProperty);
-        set => SetValue(Chart.LineColorProperty, value);
+        //Chart chart = (Chart)bindable;
+        //chart._data = (Queue<DataPoint>) newValue;
+
+        //while (chart._data.First().Time < chart._dateTimeStart)
+        //{
+        //    chart._data.Dequeue();
+        //}
+    }
+
+    public IEnumerable<DataPoint> Data
+    {
+        get => (IEnumerable<DataPoint>)GetValue(Chart.DataProperty);
+        set => SetValue(Chart.DataProperty, value);
     }
 
     public static readonly BindableProperty UnitProperty = BindableProperty.Create(nameof(Unit), typeof(string), typeof(Chart), string.Empty);
@@ -84,6 +118,14 @@ public partial class Chart : ContentView, IDrawable
         set => SetValue(Chart.SecondaryTimeScaleProperty, value);
     }
 
+    public static readonly BindableProperty TimeFormatProperty = BindableProperty.Create(nameof(TimeFormat), typeof(string), typeof(Chart), "HH:mm:ss");
+
+    public string TimeFormat
+    {
+        get => (string)GetValue(Chart.TimeFormatProperty);
+        set => SetValue(Chart.TimeFormatProperty, value);
+    }
+
     public static readonly BindableProperty LineColorProperty = BindableProperty.Create(nameof(LineColor), typeof(Color), typeof(Chart), Colors.Gray);
 
     public Color LineColor
@@ -101,10 +143,10 @@ public partial class Chart : ContentView, IDrawable
         InitializeComponent();
         GraphicsView.Drawable = this;
 
-        _invalidateTimer = new System.Timers.Timer(1000);
+        _invalidateTimer = new System.Timers.Timer(100);
         _invalidateTimer.Elapsed += _invalidateTimer_Elapsed;
         _invalidateTimer.AutoReset = true;
-        //_invalidateTimer.Start();
+        _invalidateTimer.Start();
     }
 
     private void _invalidateTimer_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)
@@ -120,23 +162,31 @@ public partial class Chart : ContentView, IDrawable
 
     private DateTime _dateTimeNow;
     private DateTime _dateTimeStart;
+    private Queue<DataPoint> _data;
 
     public void Draw(ICanvas canvas, RectF dirtyRect)
     {
-        _canvas = canvas;
-        _dirtyRect = dirtyRect;
+        try
+        {
+            _canvas = canvas;
+            _dirtyRect = dirtyRect;
 
-        if(DeviceInfo.Platform == DevicePlatform.WinUI)
-            _marginRect = MarginRect(dirtyRect, 50, 5, 5, 20);
-        else
-            _marginRect = MarginRect(dirtyRect, 50, 5, 5, 5);
+            if (DeviceInfo.Platform == DevicePlatform.WinUI)
+                _marginRect = MarginRect(dirtyRect, 50, 5, 5, 20);
+            else
+                _marginRect = MarginRect(dirtyRect, 50, 5, 5, 5);
 
-        //DrawDebugRects();
+            //DrawDebugRects();
 
-        DrawHorizontalLines();
-        //DrawVerticalLines();
+            //Debug.WriteLine($"Data has elements");
 
-        canvas.StrokeColor = LineColor;
+            DrawGrid();
+            DrawChart();
+        }
+        catch(Exception ex)
+        {
+            Debug.WriteLine(ex.ToString());
+        }
     }
 
     private void DrawDebugRects()
@@ -167,66 +217,82 @@ public partial class Chart : ContentView, IDrawable
         return (float) (_marginRect.Top + _marginRect.Height - (value - Minimum) * _marginRect.Height / (Maximum - Minimum));
     }
 
-    public void DrawHorizontalLines()
+    public void DrawGrid()
     {
+        if (_canvas == null)
+            return;
+
+        _dateTimeNow = DateTime.Now;
+        _dateTimeStart = _dateTimeNow - TimeInterval;
+
+        TimeSpan absoluteTimeSpan = _dateTimeStart - DateTime.MinValue;
+
+        // Linie pomocnicze poziome
+        _canvas.StrokeColor = Colors.DarkGray;
+        _canvas.StrokeSize = 1.0F;
         double value = Math.Ceiling(Minimum / SecondaryScale) * SecondaryScale;
 
         while (value < Maximum)
         {
-            // Nie rysuj tam, gdzie podzia³ka g³ówna
             if (value % MainScale != 0)
                 DrawHorizontalLine(value);
 
             value += SecondaryScale;
         }
 
+        // Linie pomocnicze pionowe
+        DateTime time = DateTime.MinValue + Math.Ceiling(absoluteTimeSpan / SecondaryTimeScale) * SecondaryTimeScale;
+
+        while (time < _dateTimeNow)
+        {
+            if ((time - DateTime.MinValue).Ticks % MainTimeScale.Ticks != 0)
+                DrawVerticalLine(time);
+
+            time += SecondaryTimeScale;
+        }
+
+        // Linie g³ówne poziome
+        _canvas.StrokeColor = Colors.Gray;
+        _canvas.StrokeSize = 3.0F;
         value = Math.Ceiling(Minimum / MainScale) * MainScale;
 
         while (value < Maximum)
         {
             DrawHorizontalLine(value, $"{value} {Unit}");
-
             value += MainScale;
         }
 
         DrawHorizontalLine(Minimum, $"{Minimum} {Unit}");
         DrawHorizontalLine(Maximum, $"{Maximum} {Unit}");
-    }
 
-    public void DrawVerticalLines()
-    {
-        _dateTimeNow = DateTime.Now;
-        _dateTimeStart = _dateTimeNow - TimeInterval;
+        // Linie g³ówne pionowe
+        time = DateTime.MinValue + Math.Ceiling(absoluteTimeSpan / MainTimeScale) * MainTimeScale;
 
-        DateTime time = _dateTimeStart;
-
-        while (time < _dateTimeNow)
+        while (time <= _dateTimeNow)
         {
-            DrawVerticalLine(time, time.ToString("HH:mm:ss"));
+            DrawVerticalLine(time, time.ToString(TimeFormat));
             time += MainTimeScale;
         }
 
-        time = _dateTimeStart;
-
-        while (time < _dateTimeNow)
-        {
-            DrawVerticalLine(time);
-            time += SecondaryTimeScale;
-        }
-
+        DrawVerticalLine(_dateTimeStart);
+        DrawVerticalLine(_dateTimeNow);
     }
 
     public void DrawHorizontalLine(double value)
     {
+        if (_canvas == null)
+            return;
+
         float y = CalcY(value);
-        _canvas.StrokeColor = Colors.Gray;
         _canvas.DrawLine(_marginRect.Left, y, _marginRect.Right, y);
     }
 
     public void DrawHorizontalLine(double value, string text)
     {
+        if (_canvas == null)
+            return;
+
         float y = CalcY(value);
-        _canvas.StrokeColor = Colors.White;
         _canvas.DrawLine(_marginRect.Left, y, _marginRect.Right, y);
 
         RectF textRect = new RectF();
@@ -242,66 +308,58 @@ public partial class Chart : ContentView, IDrawable
 
     public void DrawVerticalLine(DateTime time)
     {
+        if (_canvas == null)
+            return;
+
         float x = CalcX(time);
-        _canvas.StrokeColor = Colors.Gray;
         _canvas.DrawLine(x, _marginRect.Top, x, _marginRect.Bottom);
     }
 
     public void DrawVerticalLine(DateTime time, string text)
     {
-        float x = CalcX(time);
+        if (_canvas == null)
+            return;
 
-        _canvas.StrokeColor = Colors.White;
+        float x = CalcX(time);
         _canvas.DrawLine(x, _marginRect.Top, x, _marginRect.Bottom);
 
         _canvas.FontColor = Colors.White;
         _canvas.DrawString(text.ToString(), x, _marginRect.Bottom + 15 + 3, HorizontalAlignment.Center);
     }
 
-    public void DrawTimeLines()
-    {
-        //DrawTimeLine(0);
-        //DrawTimeLine(100);
-
-        //if (.NoSamples <= ChartsPage.maxQueueCapacity)
-         //   for (int i = 0; i <= ChartsPage.maxQueueCapacity / 100; i++)
-          //      DrawTimeLine(canvas, dirtyRect, chartData, 100 * i, (10 * i).ToString() + " s");
-        //else
-        //    for (int i = 1; i <= ChartsPage.maxQueueCapacity / 100; i++)
-        //        DrawTimeLine(canvas, dirtyRect, chartData, 100 * i - ChartsPage.NoSamples % 100, (10 * (i + (ChartsPage.NoSamples - ChartsPage.maxQueueCapacity) / 100)).ToString() + " s");
-    }
-
-    public void DrawSimpleTimeLines()
-    {
-        //DrawTimeLine(canvas, dirtyRect, chartData, 0);
-        //DrawTimeLine(canvas, dirtyRect, chartData, ChartsPage.maxQueueCapacity);
-
-        //if (ChartsPage.NoSamples <= ChartsPage.maxQueueCapacity)
-        //    for (int i = 0; i <= ChartsPage.maxQueueCapacity / 100; i++)
-        //        DrawTimeLine(canvas, dirtyRect, chartData, 100 * i);
-        //else
-        //    for (int i = 1; i <= ChartsPage.maxQueueCapacity / 100; i++)
-        //        DrawTimeLine(canvas, dirtyRect, chartData, 100 * i - ChartsPage.NoSamples % 100);
-    }
-
     public void DrawChart()
     {
+        if (_canvas == null)
+            return;
+
+        if (Data == null)
+            return;
+
+        //if (_data == null)
+        //    return;
+
         PathF path = new PathF();
 
-        for (int i = 0; i < Data.Count; i++)
-        {
-            float x = 0.0F;//CalcX(Data[i].X);
-            float y = CalcY(Data[i].Y);
+        Queue<DataPoint> localData = new Queue<DataPoint>(Data);
 
-            if (i == 0)
+        foreach (DataPoint dataPoint in localData)
+        {
+            if (dataPoint.Time < _dateTimeStart)
+                continue;
+
+            float x = CalcX(dataPoint.Time);
+            float y = CalcY(dataPoint.Value);
+
+            if (dataPoint == Data.First())
                 //if (chartData.f[i] != -1)
                 path.MoveTo(x, y);
             else
-                if (Data[i].Y != -1.0)
+                //if (Data[i].Y != -1.0)
                 path.LineTo(x, y);
         }
 
-        _canvas.StrokeSize = 2;
+        _canvas.StrokeSize = 5.0F;
+        _canvas.StrokeColor = LineColor;
         _canvas.DrawPath(path);
     }
     #endregion
