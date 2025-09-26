@@ -27,12 +27,10 @@
         </Grid.RowDefinitions>
 
         <control:Chart Title="Temperatura otoczenia"
-            Data="{Binding SampleTemperature}"
-            Minimum="0.0"
-            Maximum="40.0"
-            Unit="°C"
-            MainScale="10.0"
-            SecondaryScale="2.0"
+            Data="{Binding SampleTemperature}" Unit="°C"
+            Minimum="0.0" Maximum="40.0"
+            MainScale="10.0" SecondaryScale="2.0"
+            
             LineColor="Red"
             Grid.Column="0"
             Grid.Row="0"/>
