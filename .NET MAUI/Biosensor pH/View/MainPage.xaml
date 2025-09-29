@@ -35,43 +35,35 @@
         <Label Text="Biosensor pH"
             Grid.Column="1"
             Grid.Row="0"
-            TextColor="White"
-            FontSize="50"
-            FontFamily="Arial"
-            FontAttributes="Bold"
-            VerticalTextAlignment="Center"
-            Padding="50, 0, 0, 0"
-            BackgroundColor="{StaticResource Politechnika}"
-            />
+            Style="{StaticResource Biosensor_pH}"/>
 
-        <VerticalStackLayout Grid.Row="1" Grid.ColumnSpan="2">
+        <VerticalStackLayout Grid.Row="1" Grid.ColumnSpan="2" VerticalOptions="Center">
 
             <Label Text="Platforma sprzętowa:" 
-               FontSize="Title"
+               FontSize="36"
                HorizontalOptions="Center"/>
 
-            <Label x:Name="LabelDeviceType"
-               Text="Current platform:" 
-               FontSize="Subtitle"
+            <Label Text="{Binding PlatformName}"
+               FontSize="72"
                HorizontalOptions="Center"
-                   />
+               Margin="0, 0, 0, 72"/>
 
-            <Label Text="Motyw Jasny/Ciemny:" 
-               FontSize="Title"
+            <Label Text="Motyw:" 
+               FontSize="36"
                HorizontalOptions="Center"/>
-            
-            <Switch IsToggled="{Binding IsToggled}" HorizontalOptions="Center" />
 
-            <Picker SelectedIndex="2" WidthRequest="200">
-                <Picker.ItemsSource>
-                    <x:Array Type="{x:Type x:String}">
-                        <x:String>Systemowy</x:String>
-                        <x:String>Jasny</x:String>
-                        <x:String>Ciemny</x:String>
-                    </x:Array>
-                </Picker.ItemsSource>
-            </Picker>
-            
+            <Border WidthRequest="300" HeightRequest="100" Margin="0, 12, 0, 72">
+                <Picker SelectedIndex="{Binding SelectedIndex}"
+                        FontSize="36">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Systemowy</x:String>
+                            <x:String>Jasny</x:String>
+                            <x:String>Ciemny</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+            </Border>
         </VerticalStackLayout>
 
     </Grid>

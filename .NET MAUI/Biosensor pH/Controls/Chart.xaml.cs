@@ -134,6 +134,22 @@ public partial class Chart : ContentView, IDrawable
         set => SetValue(Chart.LineColorProperty, value);
     }
 
+    public static readonly BindableProperty MainLineColorProperty = BindableProperty.Create(nameof(MainLineColor), typeof(Color), typeof(Chart), Colors.Gray);
+
+    public Color MainLineColor
+    {
+        get => (Color)GetValue(Chart.MainLineColorProperty);
+        set => SetValue(Chart.MainLineColorProperty, value);
+    }
+
+    public static readonly BindableProperty SecondaryLineColorProperty = BindableProperty.Create(nameof(SecondaryLineColor), typeof(Color), typeof(Chart), Colors.Gray);
+
+    public Color SecondaryLineColor
+    {
+        get => (Color)GetValue(Chart.SecondaryLineColorProperty);
+        set => SetValue(Chart.SecondaryLineColorProperty, value);
+    }
+
     #endregion
 
     private System.Timers.Timer _invalidateTimer;

@@ -3,19 +3,23 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Biosensor_pH.Controls"
              x:Class="Biosensor_pH.Controls.Chart"
-             x:Name="this">
+             x:DataType="local:Chart"
+             x:Name="this"
+             BindingContext="{x:Reference this}">
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        
         <Label 
             x:Name="ChartTitle"
             Grid.Row="0"
             Text="Chart Title"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
+        
         <GraphicsView
             x:Name="GraphicsView"
             Grid.Column="0"
