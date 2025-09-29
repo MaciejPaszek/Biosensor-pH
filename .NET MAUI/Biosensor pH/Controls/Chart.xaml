@@ -4,8 +4,7 @@
              xmlns:local="clr-namespace:Biosensor_pH.Controls"
              x:Class="Biosensor_pH.Controls.Chart"
              x:DataType="local:Chart"
-             x:Name="this"
-             BindingContext="{x:Reference this}">
+             x:Name="this">
 
     <Grid>
         <Grid.RowDefinitions>
