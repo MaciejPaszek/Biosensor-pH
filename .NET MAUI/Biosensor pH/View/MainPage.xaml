@@ -9,28 +9,21 @@
     <ContentPage.BindingContext>
         <viewModel:MainViewModel />
     </ContentPage.BindingContext>
-    
-    <Grid
-        Margin="0"
-        ColumnSpacing="0"
-        RowSpacing="0">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        
+
+    <Grid Margin="0" RowSpacing="0" ColumnSpacing="0" >
         <Grid.RowDefinitions>
             <RowDefinition Height="100" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
 
-        <Image
-            Grid.Column="0"
-            Grid.Row="0"
+        <Image Grid.Row="0" Grid.Column="0"
             Source="politechnika_logo.png"
-            BackgroundColor="{StaticResource Politechnika}"
-            Aspect="AspectFit"/>
-
+            Aspect="AspectFit"
+            BackgroundColor="{StaticResource Politechnika50}"/>
 
         <Label Text="Biosensor pH"
             Grid.Column="1"
@@ -67,5 +60,4 @@
         </VerticalStackLayout>
 
     </Grid>
-
 </ContentPage>

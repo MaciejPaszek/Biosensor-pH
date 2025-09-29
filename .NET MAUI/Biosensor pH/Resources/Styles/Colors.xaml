@@ -10,8 +10,8 @@
     <Color x:Key="ForegroundDarkMode">#1f1f1f</Color>
     <Color x:Key="TextDarkMode">White</Color>
 
-    <Color x:Key="BackgroundLightMode">#C8C8C8</Color>
-    <Color x:Key="ForegroundLightMode">#1f1f1f</Color>
+    <Color x:Key="BackgroundLightMode">#FFFFFF</Color>
+    <Color x:Key="ForegroundLightMode">#C8C8C8</Color>
     <Color x:Key="TextLightMode">#000000</Color>
 
     <Color x:Key="MainLinesDarkMode">Gray</Color>
@@ -19,10 +19,17 @@
     <Color x:Key="MainLinesLightMode">Black</Color>
     <Color x:Key="SecondaryLinesLightMode">Gray</Color>
 
-    <Color x:Key="PolitechnikaLight">#e5edf4</Color>
-    <Color x:Key="Politechnika">#154c8e</Color>
-    <Color x:Key="PolitechnikaDark">#00234a</Color>
-    <Color x:Key="PolitechnikaDarker">#001731</Color>
+    <Color x:Key="Politechnika100">#2890ff</Color>
+    <Color x:Key="Politechnika90" >#2483f4</Color>
+    <Color x:Key="Politechnika80" >#2075db</Color>
+    <Color x:Key="Politechnika70" >#1d67c1</Color>
+    <Color x:Key="Politechnika60" >#195aa8</Color>
+    <Color x:Key="Politechnika50" >#154c8e</Color>
+    <Color x:Key="Politechnika40" >#113e75</Color>
+    <Color x:Key="Politechnika30" >#0d315b</Color>
+    <Color x:Key="Politechnika20" >#0a2342</Color>
+    <Color x:Key="Politechnika10" >#061528</Color>
+    <Color x:Key="Politechnika0"  >#02080f</Color>
 
     <Color x:Key="Primary">#003c7d</Color>
     <Color x:Key="PrimaryDark">#00234a</Color>

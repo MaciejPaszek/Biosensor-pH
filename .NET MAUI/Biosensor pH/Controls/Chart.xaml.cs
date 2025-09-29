@@ -244,7 +244,7 @@ public partial class Chart : ContentView, IDrawable
         TimeSpan absoluteTimeSpan = _dateTimeStart - DateTime.MinValue;
 
         // Linie pomocnicze poziome
-        _canvas.StrokeColor = Colors.DarkGray;
+        _canvas.StrokeColor = SecondaryLineColor;
         _canvas.StrokeSize = 1.0F;
         double value = Math.Ceiling(Minimum / SecondaryScale) * SecondaryScale;
 
@@ -268,7 +268,7 @@ public partial class Chart : ContentView, IDrawable
         }
 
         // Linie g³ówne poziome
-        _canvas.StrokeColor = Colors.Gray;
+        _canvas.StrokeColor = MainLineColor;
         _canvas.StrokeSize = 3.0F;
         value = Math.Ceiling(Minimum / MainScale) * MainScale;
 
