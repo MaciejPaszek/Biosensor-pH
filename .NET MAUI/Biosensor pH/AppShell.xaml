@@ -11,7 +11,7 @@
     ContentTemplate="{DataTemplate local:MainPage}"/>
     </FlyoutItem>
     
-    <FlyoutItem Title="Pacjenci">
+    <!--<FlyoutItem Title="Pacjenci">
         <ShellContent
     ContentTemplate="{DataTemplate local:PacjenciPage}"/>
     </FlyoutItem>
@@ -19,7 +19,7 @@
     <FlyoutItem Title="Pomiary">
         <ShellContent
     ContentTemplate="{DataTemplate local:PomiaryPage}"/>
-    </FlyoutItem>
+    </FlyoutItem>-->
 
     <FlyoutItem Title="Wykresy">
         <ShellContent
