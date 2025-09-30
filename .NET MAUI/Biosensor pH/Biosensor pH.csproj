@@ -47,10 +47,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiFont Remove="Resources\Fonts\Consolas.ttf" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <None Remove="Resources\Fonts\Consolas.ttf" />
 	</ItemGroup>
 
