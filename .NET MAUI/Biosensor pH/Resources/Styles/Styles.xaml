@@ -5,12 +5,24 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:control="clr-namespace:Biosensor_pH.Controls">
 
+    <Style TargetType="Label" x:Key="Biosensor_pH">
+        <Setter Property="TextColor" Value="White"/>
+        <Setter Property="FontSize" Value="50"/>
+        <Setter Property="FontFamily" Value="Arial"/>
+        <Setter Property="FontAttributes" Value="Bold"/>
+        <Setter Property="VerticalTextAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="50, 0, 0, 0"/>
+        <Setter Property="BackgroundColor" Value="{StaticResource Politechnika50}"/>
+    </Style>
+
+    <!--
     <Style TargetType="Page" ApplyToDerivedTypes="True">
         <Setter Property="Padding" Value="0"/>
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource BackgroundLightMode}, Dark={StaticResource BackgroundDarkMode}}" />
     </Style>
-
-    <!--<Style TargetType="Shell" ApplyToDerivedTypes="True">
+    
+    
+    <Style TargetType="Shell" ApplyToDerivedTypes="True">
         <Setter Property="Shell.BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}" />
         <Setter Property="Shell.ForegroundColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource SecondaryDarkText}}" />
         <Setter Property="Shell.TitleColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource SecondaryDarkText}}" />
@@ -34,7 +46,7 @@
         <Setter Property="BarTextColor" Value="{AppThemeBinding Light={StaticResource Magenta}, Dark={StaticResource White}}" />
         <Setter Property="UnselectedTabColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray950}}" />
         <Setter Property="SelectedTabColor" Value="{AppThemeBinding Light={StaticResource Gray950}, Dark={StaticResource Gray200}}" />
-    </Style>-->
+    </Style>
 
     <Style TargetType="Border">
         <Setter Property="BackgroundColor" Value="Transparent"/>
@@ -50,15 +62,7 @@
         <Setter Property="FontSize" Value="14" />
     </Style>
 
-    <Style TargetType="Label" x:Key="Biosensor_pH">
-        <Setter Property="TextColor" Value="White"/>
-        <Setter Property="FontSize" Value="50"/>
-        <Setter Property="FontFamily" Value="Arial"/>
-        <Setter Property="FontAttributes" Value="Bold"/>
-        <Setter Property="VerticalTextAlignment" Value="Center"/>
-        <Setter Property="Padding" Value="50, 0, 0, 0"/>
-        <Setter Property="BackgroundColor" Value="{StaticResource Politechnika50}"/>
-    </Style>
+    
 
     <Style TargetType="Button">
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource TextLightMode}, Dark={StaticResource TextDarkMode}}" />
@@ -156,10 +160,10 @@
             </VisualStateGroupList>
         </Setter>
     </Style>
-
+    
     <Style TargetType="control:Chart">
         <Setter Property="MainLineColor"      Value="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource Gray500}}" />
         <Setter Property="SecondaryLineColor" Value="{AppThemeBinding Light={StaticResource Gray400}, Dark={StaticResource Gray600}}" />
     </Style>
-
+    -->
 </ResourceDictionary>
